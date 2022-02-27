@@ -2,6 +2,7 @@ package com.example.demo.entity.task;
 
 import com.example.demo.entity.auth.AuthUser;
 import com.example.demo.entity.task.enums.Level;
+import com.example.demo.entity.task.enums.TaskPriority;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +28,7 @@ public class Task {
 
     private Integer taskOrder;
 
+    private TaskPriority priority;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AuthUser> taskMembers;

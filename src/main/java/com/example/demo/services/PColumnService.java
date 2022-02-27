@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.dto.pColumn.PColumnCreateDto;
 import com.example.demo.entity.column.PColumn;
 import com.example.demo.repository.column.PColumnRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,17 +25,11 @@ public class PColumnService {
 
     public List<PColumn> getAllByProjectId(Long id) {
         Optional<List<PColumn>> listColumns = repository.findAllByProjectIdAndDeleted(id, false);
-
-        if (listColumns.isPresent()) {
-            List<PColumn> pColumns = listColumns.get();
-            return pColumns;
-        }
-        return null;
-
+        return listColumns.orElse(null);
     }
 
-    public Long addColumn(Long id, Long userId, PColumnCreateDto pColumnCreateDto) {
-        Optional<PColumn> topByProjectIdOrderByColumnOrderDesc = repository.findTopByProjectIdOrderByColumnOrderDesc(id);
+    public Long addColumn(Long id, Long userId, @NotNull PColumnCreateDto pColumnCreateDto) {
+        Optional<PColumn> topByProjectIdOrderByColumnOrderDesc = repository.findTopByProjectIdAndDeletedOrderByColumnOrderDesc(id, false);
 
         PColumn pColumn = new PColumn();
         pColumn.setProjectId(id);
@@ -50,8 +45,16 @@ public class PColumnService {
             }
         } else
             pColumn.setColumnOrder(1);
-
         PColumn save = repository.save(pColumn);
         return save.getId();
+    }
+
+    public PColumn getColumnByColumnId(Long id) {
+        Optional<PColumn> byId = repository.findById(id);
+        return byId.orElse(null);
+    }
+
+    public void saveColumn(PColumn pColumn) {
+        repository.save(pColumn);
     }
 }

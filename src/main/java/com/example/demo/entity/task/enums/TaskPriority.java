@@ -3,17 +3,16 @@ package com.example.demo.entity.task.enums;
 import lombok.Getter;
 
 /**
- * @author Amonov Bunyod, пт 25.02.2022 16:09 .
+ * @author Saydali Murodullayev, Sun 6:55 PM. 2/27/2022
  */
-
 @Getter
-public enum Level {
-    HARD,
+public enum TaskPriority {
+    HIGH,
     MEDIUM,
-    EASY;
+    LOW;
 
-    public static Level getLevelByName(String string) {
-        for (Level value : values()) {
+    public static TaskPriority getPriorityByName(String string) {
+        for (TaskPriority value : values()) {
             if (value.name().equalsIgnoreCase(string))
                 return value;
         }

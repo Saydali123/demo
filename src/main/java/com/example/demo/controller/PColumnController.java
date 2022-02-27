@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.pColumn.PColumnCreateDto;
 import com.example.demo.entity.column.PColumn;
 import com.example.demo.services.PColumnService;
-import org.hibernate.mapping.Column;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
