@@ -12,4 +12,5 @@ public interface PColumnRepository extends JpaRepository<PColumn, Long> {
 
     Optional<List<PColumn>> findAllByProjectIdAndDeleted(Long id, Boolean boo);
 
+    Optional<PColumn> findTopByProjectIdOrderByColumnOrderDesc(Long projectId);
 }
